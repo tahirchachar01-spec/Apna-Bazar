@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { ArrowLeft, Save, Loader2, AlertCircle } from 'lucide-react';
+import { ImageUploader } from '@/components/admin/ImageUploader';
 
 export default function NewProductPage() {
   const router = useRouter();
@@ -166,18 +167,11 @@ export default function NewProductPage() {
             />
           </div>
 
-          <div>
-            <label className="block text-xs font-semibold text-brand-black uppercase tracking-wider mb-1.5">
-              Product Image URL
-            </label>
-            <input
-              type="url"
-              placeholder="https://images.unsplash.com/..."
-              value={formData.imageUrl}
-              onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
-              className="w-full px-4 py-2.5 rounded-brand border border-gray-200 text-xs text-brand-black focus:outline-none focus:border-brand-brown"
-            />
-          </div>
+          <ImageUploader
+            value={formData.imageUrl}
+            onChange={(url) => setFormData({ ...formData, imageUrl: url })}
+            label="Product Image"
+          />
         </div>
 
         {/* Pricing & Stock Card */}
