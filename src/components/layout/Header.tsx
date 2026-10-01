@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { Search, Heart, ShoppingBag, User, Menu, X, Flame, Package, ChevronRight, Layers } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { BrandLogo } from '@/components/ui/BrandLogo';
+import { DownloadAppButton } from '@/components/common/DownloadAppButton';
 
 const CATEGORY_ITEMS = [
   { name: 'Fashion & Apparel', slug: 'fashion' },
@@ -111,6 +112,9 @@ export function Header() {
               <User className="w-5 h-5 group-hover:text-brand-brown transition-colors" />
               <span className="text-[10px] font-medium mt-0.5 hidden sm:block">Admin</span>
             </Link>
+
+            {/* Download App / APK Button */}
+            <DownloadAppButton variant="header" />
           </div>
         </div>
 
@@ -207,6 +211,9 @@ export function Header() {
                 Contact & Support
               </Link>
             </div>
+
+            {/* Download APK / Mobile App */}
+            <DownloadAppButton variant="drawer" />
 
             {/* Admin Portal Link */}
             <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">

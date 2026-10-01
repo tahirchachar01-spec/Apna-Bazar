@@ -53,12 +53,12 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {/* Brand info */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="relative h-12 w-48 bg-white p-2 rounded-lg inline-block">
+            <div className="relative h-14 w-52 inline-block">
               <Image
-                src="/images/brand/logo.jpg"
+                src="/logo-white.png"
                 alt="APNA Bazar"
                 fill
-                className="object-contain p-1"
+                className="object-contain object-left"
               />
             </div>
             <p className="text-sm text-gray-400 leading-relaxed max-w-sm">

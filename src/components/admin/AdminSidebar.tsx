@@ -45,13 +45,13 @@ export function AdminSidebar({ onClose }: AdminSidebarProps) {
           onClick={() => onClose?.()}
           className="flex items-center gap-3 group"
         >
-          <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white p-1 shadow-sm shrink-0 border border-white/20 group-hover:scale-105 transition-transform">
+          <div className="relative w-11 h-11 shrink-0 group-hover:scale-105 transition-transform">
             <Image
-              src="/logo.jpg"
+              src="/logo-white.png"
               alt="APNA Bazar Logo"
               fill
               priority
-              sizes="40px"
+              sizes="44px"
               className="object-contain"
             />
           </div>

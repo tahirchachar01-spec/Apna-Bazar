@@ -17,9 +17,9 @@ export function BrandLogo({
   size = 'md',
 }: BrandLogoProps) {
   const sizeStyles = {
-    sm: 'h-9 w-28 sm:w-32',
-    md: 'h-11 w-36 sm:h-12 sm:w-44',
-    lg: 'h-14 w-48 sm:h-16 sm:w-56',
+    sm: 'h-10 w-32 sm:h-11 sm:w-36',
+    md: 'h-12 w-38 sm:h-14 sm:w-48 md:h-16 md:w-56',
+    lg: 'h-16 w-52 sm:h-20 sm:w-64',
   };
 
   const content = (
@@ -27,19 +27,16 @@ export function BrandLogo({
       className={cn(
         'relative inline-flex items-center transition-transform hover:scale-[1.02]',
         sizeStyles[size],
-        variant === 'dark'
-          ? 'bg-white rounded-xl p-1.5 shadow-sm border border-white/10'
-          : '',
         className
       )}
     >
       <Image
-        src="/logo.jpg"
-        alt="APNA Bazar"
+        src={variant === 'dark' ? '/logo-white.png' : '/logo-transparent.png'}
+        alt="APNA Bazar - Shop Smarter • Live Better"
         fill
-        sizes="(max-width: 768px) 140px, 200px"
+        sizes="(max-width: 768px) 180px, 260px"
         priority
-        className="object-contain"
+        className="object-contain object-left"
       />
     </div>
   );
