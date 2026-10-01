@@ -23,6 +23,8 @@ import {
   RefreshCw,
   Loader2,
   ChevronDown,
+  Trash2,
+  AlertTriangle,
 } from 'lucide-react';
 import defaultOrders from '@/data/orders.json';
 
@@ -33,6 +35,9 @@ export default function AdminOrdersPage() {
   const [updatingOrderId, setUpdatingOrderId] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [orderToDelete, setOrderToDelete] = useState<Order | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
   const detailsRef = useRef<HTMLDivElement>(null);
 
   // Fetch orders from API
@@ -95,6 +100,38 @@ export default function AdminOrdersPage() {
       alert('Network error updating status');
     } finally {
       setUpdatingOrderId(null);
+    }
+  };
+
+  const handleDeleteOrder = async () => {
+    if (!orderToDelete) return;
+    setIsDeleting(true);
+    try {
+      const res = await fetch(`/api/orders?id=${encodeURIComponent(orderToDelete.id)}`, {
+        method: 'DELETE',
+      });
+      const data = await res.json();
+      if (res.ok && data.success) {
+        setOrders((prev) =>
+          prev.filter(
+            (o) => o.id !== orderToDelete.id && o.orderNumber !== orderToDelete.orderNumber
+          )
+        );
+        if (selectedOrder?.id === orderToDelete.id) {
+          setSelectedOrder(null);
+        }
+        setToastMessage(
+          `Order #${orderToDelete.orderNumber || orderToDelete.id} deleted successfully.`
+        );
+        setTimeout(() => setToastMessage(null), 4000);
+        setOrderToDelete(null);
+      } else {
+        alert(data.error || 'Failed to delete order');
+      }
+    } catch {
+      alert('Network error while deleting order');
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -311,21 +348,35 @@ export default function AdminOrdersPage() {
                       </td>
 
                       <td className="py-3.5 px-4 text-right">
-                        <button
-                          type="button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleSelectOrder(o);
-                          }}
-                          className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
-                            isSelected
-                              ? 'bg-brand-brown text-white'
-                              : 'text-gray-500 hover:text-brand-brown hover:bg-gray-100'
-                          }`}
-                        >
-                          <Eye className="w-3.5 h-3.5" />
-                          <span>{isSelected ? 'Viewing' : 'Details'}</span>
-                        </button>
+                        <div className="inline-flex items-center gap-1.5 justify-end">
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleSelectOrder(o);
+                            }}
+                            className={`inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${
+                              isSelected
+                                ? 'bg-brand-brown text-white shadow-xs'
+                                : 'text-gray-600 hover:text-brand-brown hover:bg-gray-100'
+                            }`}
+                          >
+                            <Eye className="w-3.5 h-3.5" />
+                            <span>{isSelected ? 'Viewing' : 'Details'}</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setOrderToDelete(o);
+                            }}
+                            title="Delete Order"
+                            className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium text-red-600 hover:text-white hover:bg-red-600 bg-red-50 border border-red-200 transition-colors shadow-2xs"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                            <span>Delete</span>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   );
@@ -395,6 +446,17 @@ export default function AdminOrdersPage() {
                 <MessageSquare className="w-4 h-4 fill-white" />
                 <span>WhatsApp Customer</span>
               </a>
+
+              {/* Delete Order Action */}
+              <button
+                type="button"
+                onClick={() => setOrderToDelete(selectedOrder)}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-red-50 hover:bg-red-600 hover:text-white text-red-600 border border-red-200 text-xs font-semibold rounded-lg shadow-sm transition-colors cursor-pointer"
+                title="Delete this order"
+              >
+                <Trash2 className="w-4 h-4" />
+                <span>Delete Order</span>
+              </button>
 
               {/* Close Button */}
               <button
@@ -628,6 +690,94 @@ export default function AdminOrdersPage() {
               </table>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* ======================================================== */}
+      {/* DELETE ORDER CONFIRMATION MODAL                          */}
+      {/* ======================================================== */}
+      {orderToDelete && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-fadeIn">
+          <div className="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-gray-100 space-y-5 animate-scaleUp">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-full bg-red-100 text-red-600 flex items-center justify-center shrink-0">
+                <AlertTriangle className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-brand-black">Delete Order Confirmation</h3>
+                <p className="text-xs text-gray-500">This action will permanently remove this order.</p>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 rounded-xl p-4 border border-gray-200/80 text-xs space-y-2 text-gray-700">
+              <div className="flex justify-between">
+                <span className="text-gray-500">Order ID:</span>
+                <span className="font-bold text-brand-brown">#{orderToDelete.orderNumber || orderToDelete.id}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-500">Customer:</span>
+                <span className="font-semibold text-brand-black">{orderToDelete.customer.fullName}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-500">Phone:</span>
+                <span className="font-medium text-gray-700">{orderToDelete.customer.phoneNumber}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-500">City / Address:</span>
+                <span className="font-medium text-gray-700">{orderToDelete.customer.city}</span>
+              </div>
+              <div className="flex justify-between border-t border-gray-200/60 pt-2">
+                <span className="text-gray-500">Total Amount:</span>
+                <span className="font-extrabold text-brand-black text-sm">{formatPrice(orderToDelete.total)}</span>
+              </div>
+            </div>
+
+            <div className="flex items-center justify-end gap-3 pt-1">
+              <button
+                type="button"
+                disabled={isDeleting}
+                onClick={() => setOrderToDelete(null)}
+                className="px-4 py-2.5 rounded-lg text-xs font-semibold text-gray-600 hover:bg-gray-100 transition-colors disabled:opacity-50"
+              >
+                Cancel
+              </button>
+              <button
+                type="button"
+                disabled={isDeleting}
+                onClick={handleDeleteOrder}
+                className="px-5 py-2.5 rounded-lg text-xs font-bold bg-red-600 hover:bg-red-700 text-white transition-colors flex items-center gap-2 shadow-sm disabled:opacity-75 cursor-pointer"
+              >
+                {isDeleting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Deleting Order...</span>
+                  </>
+                ) : (
+                  <>
+                    <Trash2 className="w-4 h-4" />
+                    <span>Yes, Delete Order</span>
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ======================================================== */}
+      {/* SUCCESS TOAST NOTIFICATION                               */}
+      {/* ======================================================== */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 bg-emerald-800 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 text-xs font-medium animate-fadeIn border border-emerald-600">
+          <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
+          <span>{toastMessage}</span>
+          <button
+            type="button"
+            onClick={() => setToastMessage(null)}
+            className="p-1 hover:bg-white/10 rounded transition-colors ml-2"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
         </div>
       )}
     </div>

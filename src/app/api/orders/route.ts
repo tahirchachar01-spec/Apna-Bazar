@@ -83,3 +83,59 @@ export async function PATCH(req: NextRequest) {
     );
   }
 }
+
+export async function DELETE(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    let orderId = searchParams.get('id');
+
+    if (!orderId) {
+      try {
+        const body = await req.json();
+        orderId = body.id;
+      } catch {
+        // Query param not present and body was not JSON
+      }
+    }
+
+    if (!orderId) {
+      return NextResponse.json(
+        { error: 'Order ID is required to delete' },
+        { status: 400 }
+      );
+    }
+
+    const orders = await getOrdersFromDb();
+    const initialCount = orders.length;
+    const updatedOrders = orders.filter(
+      (o) => o.id !== orderId && o.orderNumber !== orderId
+    );
+
+    if (updatedOrders.length === initialCount) {
+      return NextResponse.json(
+        { error: 'Order not found or already deleted' },
+        { status: 404 }
+      );
+    }
+
+    const saveResult = await saveOrdersToDb(updatedOrders);
+    if (!saveResult.success) {
+      return NextResponse.json(
+        { error: saveResult.error || 'Failed to delete order from database' },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({
+      success: true,
+      message: 'Order deleted successfully',
+      deletedId: orderId,
+    });
+  } catch (error) {
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'Failed to delete order' },
+      { status: 500 }
+    );
+  }
+}
+
