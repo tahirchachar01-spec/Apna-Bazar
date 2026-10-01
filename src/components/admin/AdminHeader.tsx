@@ -1,25 +1,43 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Search, Bell, ChevronDown, User, ShieldCheck } from 'lucide-react';
+import { Search, Bell, ChevronDown, Menu, User, ShieldCheck } from 'lucide-react';
 
-export function AdminHeader() {
+interface AdminHeaderProps {
+  onToggleSidebar?: () => void;
+}
+
+export function AdminHeader({ onToggleSidebar }: AdminHeaderProps) {
   const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   return (
-    <header className="bg-white border-b border-gray-200 h-16 px-6 flex items-center justify-between sticky top-0 z-30 shadow-subtle">
-      {/* Search Input */}
-      <div className="relative w-72 sm:w-96">
-        <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
-        <input
-          type="text"
-          placeholder="Search anything across dashboard..."
-          className="w-full bg-gray-50 border border-gray-200 rounded-full pl-9 pr-4 py-2 text-xs text-brand-black placeholder-gray-400 focus:outline-none focus:border-brand-brown focus:bg-white transition-colors"
-        />
+    <header className="bg-white border-b border-gray-200 h-16 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 shadow-subtle">
+      {/* Left side: Hamburger button on mobile + Search */}
+      <div className="flex items-center gap-3">
+        {onToggleSidebar && (
+          <button
+            type="button"
+            onClick={onToggleSidebar}
+            className="lg:hidden p-2 text-gray-700 hover:text-brand-brown hover:bg-gray-100 rounded-lg transition-colors"
+            aria-label="Toggle navigation menu"
+          >
+            <Menu className="w-5 h-5" />
+          </button>
+        )}
+
+        {/* Search Input */}
+        <div className="relative w-48 sm:w-80 md:w-96">
+          <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <input
+            type="text"
+            placeholder="Search dashboard..."
+            className="w-full bg-gray-50 border border-gray-200 rounded-full pl-9 pr-4 py-2 text-xs text-brand-black placeholder-gray-400 focus:outline-none focus:border-brand-brown focus:bg-white transition-colors"
+          />
+        </div>
       </div>
 
       {/* Right Controls */}
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-3 sm:gap-5">
         {/* Notifications */}
         <button
           type="button"
@@ -40,9 +58,9 @@ export function AdminHeader() {
           <button
             type="button"
             onClick={() => setShowProfileMenu(!showProfileMenu)}
-            className="flex items-center gap-3 p-1.5 rounded-full hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-2 sm:gap-3 p-1 sm:p-1.5 rounded-full hover:bg-gray-50 transition-colors"
           >
-            <div className="w-8 h-8 rounded-full bg-brand-brown text-white flex items-center justify-center font-bold text-xs">
+            <div className="w-8 h-8 rounded-full bg-brand-brown text-white flex items-center justify-center font-bold text-xs shadow-sm">
               A
             </div>
             <div className="text-left hidden sm:block">

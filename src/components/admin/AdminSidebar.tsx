@@ -2,8 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { BrandLogo } from '@/components/ui/BrandLogo';
 import {
   LayoutDashboard,
   Package,
@@ -15,6 +15,7 @@ import {
   LogOut,
   Sliders,
   ExternalLink,
+  X,
 } from 'lucide-react';
 
 const ADMIN_LINKS = [
@@ -28,14 +29,53 @@ const ADMIN_LINKS = [
   { name: 'WhatsApp Config', href: '/admin/settings/whatsapp', icon: Sliders },
 ];
 
-export function AdminSidebar() {
+interface AdminSidebarProps {
+  onClose?: () => void;
+}
+
+export function AdminSidebar({ onClose }: AdminSidebarProps) {
   const pathname = usePathname();
 
   return (
     <aside className="w-64 bg-brand-black text-white flex flex-col shrink-0 min-h-screen border-r border-gray-800">
       {/* Brand Header */}
-      <div className="p-5 border-b border-gray-800 flex items-center justify-between">
-        <BrandLogo variant="dark" size="sm" href="/admin" />
+      <div className="p-4 border-b border-gray-800 flex items-center justify-between">
+        <Link
+          href="/admin"
+          onClick={() => onClose?.()}
+          className="flex items-center gap-3 group"
+        >
+          <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-white p-1 shadow-sm shrink-0 border border-white/20 group-hover:scale-105 transition-transform">
+            <Image
+              src="/logo.jpg"
+              alt="APNA Bazar Logo"
+              fill
+              priority
+              sizes="40px"
+              className="object-contain"
+            />
+          </div>
+          <div className="flex flex-col">
+            <span className="font-extrabold text-sm tracking-wider text-white uppercase group-hover:text-brand-brown transition-colors">
+              APNA BAZAR
+            </span>
+            <span className="text-[10px] text-amber-500 font-semibold tracking-widest uppercase">
+              Admin Portal
+            </span>
+          </div>
+        </Link>
+
+        {/* Mobile close button */}
+        {onClose && (
+          <button
+            type="button"
+            onClick={onClose}
+            className="lg:hidden p-1.5 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+            aria-label="Close sidebar"
+          >
+            <X className="w-5 h-5" />
+          </button>
+        )}
       </div>
 
       {/* Navigation Menu */}
@@ -51,6 +91,7 @@ export function AdminSidebar() {
             <Link
               key={item.name}
               href={item.href}
+              onClick={() => onClose?.()}
               className={`flex items-center justify-between px-3.5 py-2.5 rounded-brand text-xs font-semibold transition-colors ${
                 isActive
                   ? 'bg-brand-brown text-white shadow-sm'
