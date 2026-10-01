@@ -3,7 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   LayoutDashboard,
   Package,
@@ -35,6 +35,23 @@ interface AdminSidebarProps {
 
 export function AdminSidebar({ onClose }: AdminSidebarProps) {
   const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch (e) {
+      // ignore
+    }
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('admin_auth');
+      localStorage.removeItem('admin_user');
+      document.cookie = 'apna_admin_auth=; path=/; max-age=0';
+    }
+    onClose?.();
+    router.replace('/login');
+    router.refresh();
+  };
 
   return (
     <aside className="w-64 bg-brand-black text-white flex flex-col shrink-0 min-h-screen border-r border-gray-800">
@@ -122,13 +139,14 @@ export function AdminSidebar({ onClose }: AdminSidebarProps) {
           <ExternalLink className="w-4 h-4" />
           <span>View Public Store</span>
         </Link>
-        <Link
-          href="/admin/login"
-          className="flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-red-400 hover:text-red-300 hover:bg-white/5 rounded-brand transition-colors"
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="w-full flex items-center gap-2.5 px-3 py-2 text-xs font-medium text-red-400 hover:text-red-300 hover:bg-white/5 rounded-brand transition-colors text-left"
         >
           <LogOut className="w-4 h-4" />
-          <span>Logout</span>
-        </Link>
+          <span>Logout (Hamza)</span>
+        </button>
       </div>
     </aside>
   );

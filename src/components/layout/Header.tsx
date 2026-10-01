@@ -102,17 +102,6 @@ export function Header() {
               </div>
               <span className="text-[10px] font-medium mt-0.5 hidden sm:block">Cart</span>
             </Link>
-
-            {/* Admin Portal Quick Icon */}
-            <Link
-              href="/admin"
-              className="flex flex-col items-center text-gray-500 hover:text-brand-brown transition-colors group p-1.5"
-              title="Admin Portal"
-            >
-              <User className="w-5 h-5 group-hover:text-brand-brown transition-colors" />
-              <span className="text-[10px] font-medium mt-0.5 hidden sm:block">Admin</span>
-            </Link>
-
             {/* Download App / APK Button */}
             <DownloadAppButton variant="header" />
           </div>
@@ -215,17 +204,6 @@ export function Header() {
             {/* Download APK / Mobile App */}
             <DownloadAppButton variant="drawer" />
 
-            {/* Admin Portal Link */}
-            <div className="pt-2 border-t border-gray-100 flex items-center justify-between text-xs">
-              <span className="text-gray-400">Store Management</span>
-              <Link
-                href="/admin"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-brand-brown font-bold hover:underline"
-              >
-                Open Admin Dashboard →
-              </Link>
-            </div>
           </div>
         )}
       </div>

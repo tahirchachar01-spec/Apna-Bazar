@@ -145,11 +145,6 @@ export function Footer() {
                   Return & Exchange Policy
                 </Link>
               </li>
-              <li>
-                <Link href="/admin/login" className="text-xs text-gray-500 hover:text-gray-300">
-                  Store Administration
-                </Link>
-              </li>
             </ul>
           </div>
 

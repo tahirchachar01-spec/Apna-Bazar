@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Search, Bell, ChevronDown, Menu, User, ShieldCheck } from 'lucide-react';
 
 interface AdminHeaderProps {
@@ -8,7 +9,24 @@ interface AdminHeaderProps {
 }
 
 export function AdminHeader({ onToggleSidebar }: AdminHeaderProps) {
+  const router = useRouter();
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await fetch('/api/auth/logout', { method: 'POST' });
+    } catch (e) {
+      // ignore
+    }
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('admin_auth');
+      localStorage.removeItem('admin_user');
+      document.cookie = 'apna_admin_auth=; path=/; max-age=0';
+    }
+    setShowProfileMenu(false);
+    router.replace('/login');
+    router.refresh();
+  };
 
   return (
     <header className="bg-white border-b border-gray-200 h-16 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 shadow-subtle">
@@ -61,10 +79,10 @@ export function AdminHeader({ onToggleSidebar }: AdminHeaderProps) {
             className="flex items-center gap-2 sm:gap-3 p-1 sm:p-1.5 rounded-full hover:bg-gray-50 transition-colors"
           >
             <div className="w-8 h-8 rounded-full bg-brand-brown text-white flex items-center justify-center font-bold text-xs shadow-sm">
-              A
+              H
             </div>
             <div className="text-left hidden sm:block">
-              <span className="block text-xs font-bold text-brand-black">Admin</span>
+              <span className="block text-xs font-bold text-brand-black">Hamza</span>
               <span className="block text-[10px] text-gray-400">Administrator</span>
             </div>
             <ChevronDown className="w-3.5 h-3.5 text-gray-400" />
@@ -74,21 +92,23 @@ export function AdminHeader({ onToggleSidebar }: AdminHeaderProps) {
           {showProfileMenu && (
             <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-elevated py-1 z-50 text-xs">
               <div className="px-4 py-2 border-b border-gray-100">
-                <p className="font-semibold text-brand-black">Store Owner</p>
-                <p className="text-gray-400 text-[11px]">admin@apnabazar.pk</p>
+                <p className="font-semibold text-brand-black">Hamza</p>
+                <p className="text-gray-400 text-[11px]">Administrator</p>
               </div>
               <a
                 href="/admin/settings"
+                onClick={() => setShowProfileMenu(false)}
                 className="block px-4 py-2 text-gray-700 hover:bg-brand-cream hover:text-brand-brown"
               >
                 Store Settings
               </a>
-              <a
-                href="/admin/login"
-                className="block px-4 py-2 text-red-600 hover:bg-red-50"
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="w-full text-left block px-4 py-2 text-red-600 hover:bg-red-50"
               >
                 Sign Out
-              </a>
+              </button>
             </div>
           )}
         </div>
