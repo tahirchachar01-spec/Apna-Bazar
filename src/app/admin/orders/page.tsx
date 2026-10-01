@@ -22,7 +22,7 @@ import {
   CreditCard,
   RefreshCw,
   Loader2,
-  Check,
+  ChevronDown,
 } from 'lucide-react';
 import defaultOrders from '@/data/orders.json';
 
@@ -30,7 +30,7 @@ export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<Order[]>(defaultOrders as Order[]);
   const [loading, setLoading] = useState(true);
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
-  const [updatingStatus, setUpdatingStatus] = useState(false);
+  const [updatingOrderId, setUpdatingOrderId] = useState<string | null>(null);
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
   const detailsRef = useRef<HTMLDivElement>(null);
@@ -44,7 +44,6 @@ export default function AdminOrdersPage() {
         const data = await res.json();
         if (Array.isArray(data)) {
           setOrders(data);
-          // If selected order exists, update reference
           if (selectedOrder) {
             const updated = data.find((o: Order) => o.id === selectedOrder.id);
             if (updated) setSelectedOrder(updated);
@@ -64,55 +63,56 @@ export default function AdminOrdersPage() {
 
   const handleSelectOrder = (order: Order) => {
     if (selectedOrder?.id === order.id) {
-      // Toggle if already selected
       setSelectedOrder(null);
     } else {
       setSelectedOrder(order);
-      // Smooth scroll into view
       setTimeout(() => {
         detailsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     }
   };
 
-  const handleStatusChange = async (newStatus: OrderStatus) => {
-    if (!selectedOrder) return;
-    setUpdatingStatus(true);
+  const handleStatusChange = async (orderId: string, newStatus: OrderStatus) => {
+    setUpdatingOrderId(orderId);
     try {
       const res = await fetch('/api/orders', {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id: selectedOrder.id, status: newStatus }),
+        body: JSON.stringify({ id: orderId, status: newStatus }),
       });
       const data = await res.json();
       if (res.ok && data.success) {
-        const updated = { ...selectedOrder, status: newStatus };
-        setSelectedOrder(updated);
         setOrders((prev) =>
-          prev.map((o) => (o.id === selectedOrder.id ? updated : o))
+          prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o))
         );
+        if (selectedOrder && selectedOrder.id === orderId) {
+          setSelectedOrder((prev) => (prev ? { ...prev, status: newStatus } : null));
+        }
       } else {
         alert(data.error || 'Failed to update order status');
       }
     } catch {
       alert('Network error updating status');
     } finally {
-      setUpdatingStatus(false);
+      setUpdatingOrderId(null);
     }
   };
 
   const getStatusBadge = (status: OrderStatus) => {
     switch (status) {
       case 'Pending':
-        return 'bg-amber-50 text-amber-700 border-amber-200';
+        return 'bg-amber-50 text-amber-800 border-amber-200 hover:bg-amber-100/70';
+      case 'Confirmed':
       case 'Processing':
-        return 'bg-blue-50 text-blue-700 border-blue-200';
+        return 'bg-blue-50 text-blue-800 border-blue-200 hover:bg-blue-100/70';
+      case 'Out for Delivery':
       case 'Shipped':
-        return 'bg-purple-50 text-purple-700 border-purple-200';
+        return 'bg-purple-50 text-purple-800 border-purple-200 hover:bg-purple-100/70';
       case 'Delivered':
-        return 'bg-emerald-50 text-emerald-700 border-emerald-200';
+      case 'Received':
+        return 'bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100/70';
       case 'Cancelled':
-        return 'bg-red-50 text-red-700 border-red-200';
+        return 'bg-red-50 text-red-800 border-red-200 hover:bg-red-100/70';
       default:
         return 'bg-gray-100 text-gray-700 border-gray-200';
     }
@@ -127,7 +127,11 @@ export default function AdminOrdersPage() {
       o.customer.city.toLowerCase().includes(search.toLowerCase());
 
     const matchesStatus =
-      statusFilter === 'all' || o.status.toLowerCase() === statusFilter.toLowerCase();
+      statusFilter === 'all' ||
+      o.status.toLowerCase() === statusFilter.toLowerCase() ||
+      (statusFilter === 'Confirmed' && o.status === 'Processing') ||
+      (statusFilter === 'Out for Delivery' && o.status === 'Shipped') ||
+      (statusFilter === 'Delivered' && o.status === 'Received');
 
     return matchesSearch && matchesStatus;
   });
@@ -139,7 +143,7 @@ export default function AdminOrdersPage() {
         <div>
           <h1 className="text-2xl font-bold text-brand-black tracking-tight">Customer Orders</h1>
           <p className="text-xs text-gray-400 mt-0.5">
-            Click any order to inspect customer info and items breakdown below
+            Change order status directly using dropdowns or click any row for detailed inspection
           </p>
         </div>
 
@@ -167,23 +171,30 @@ export default function AdminOrdersPage() {
         </div>
 
         <div className="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-1 sm:pb-0">
-          {['all', 'Pending', 'Processing', 'Shipped', 'Delivered', 'Cancelled'].map((st) => (
+          {[
+            { id: 'all', label: 'All Orders' },
+            { id: 'Pending', label: 'Pending' },
+            { id: 'Confirmed', label: 'Confirmed' },
+            { id: 'Out for Delivery', label: 'Out for Delivery' },
+            { id: 'Delivered', label: 'Delivered / Received' },
+            { id: 'Cancelled', label: 'Cancelled' },
+          ].map((st) => (
             <button
-              key={st}
-              onClick={() => setStatusFilter(st)}
+              key={st.id}
+              onClick={() => setStatusFilter(st.id)}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${
-                statusFilter.toLowerCase() === st.toLowerCase()
+                statusFilter.toLowerCase() === st.id.toLowerCase()
                   ? 'bg-brand-brown text-white shadow-sm'
                   : 'bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200'
               }`}
             >
-              {st === 'all' ? 'All Orders' : st}
+              {st.label}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Orders Master Table */}
+      {/* Orders Master Table with Interactive Status Dropdowns */}
       <div className="bg-white rounded-2xl border border-gray-200 shadow-subtle overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
@@ -194,7 +205,7 @@ export default function AdminOrdersPage() {
                 <th className="py-3.5 px-4">Phone / City</th>
                 <th className="py-3.5 px-4">Items</th>
                 <th className="py-3.5 px-4">Total</th>
-                <th className="py-3.5 px-4">Status</th>
+                <th className="py-3.5 px-4">Status (Click to Change)</th>
                 <th className="py-3.5 px-4 text-right">Actions</th>
               </tr>
             </thead>
@@ -215,6 +226,14 @@ export default function AdminOrdersPage() {
               ) : (
                 filteredOrders.map((o) => {
                   const isSelected = selectedOrder?.id === o.id;
+                  const isUpdating = updatingOrderId === o.id;
+
+                  // Normalize display status for select value
+                  let selectValue: OrderStatus = o.status;
+                  if (o.status === 'Processing') selectValue = 'Confirmed';
+                  if (o.status === 'Shipped') selectValue = 'Out for Delivery';
+                  if (o.status === 'Received') selectValue = 'Delivered';
+
                   return (
                     <tr
                       key={o.id}
@@ -248,15 +267,49 @@ export default function AdminOrdersPage() {
                       <td className="py-3.5 px-4 font-bold text-brand-black">
                         {formatPrice(o.total)}
                       </td>
-                      <td className="py-3.5 px-4">
-                        <span
-                          className={`inline-flex px-2.5 py-0.5 rounded-full text-[10px] font-bold border ${getStatusBadge(
-                            o.status
-                          )}`}
-                        >
-                          {o.status}
-                        </span>
+
+                      {/* Interactive Status Dropdown Column */}
+                      <td
+                        className="py-3.5 px-4"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <div className="relative inline-flex items-center">
+                          <select
+                            value={selectValue}
+                            disabled={isUpdating}
+                            onChange={(e) =>
+                              handleStatusChange(o.id, e.target.value as OrderStatus)
+                            }
+                            className={`cursor-pointer appearance-none pl-3 pr-7 py-1.5 rounded-full text-[11px] font-bold border outline-none shadow-sm transition-all focus:ring-2 focus:ring-brand-brown/30 disabled:opacity-60 ${getStatusBadge(
+                              o.status
+                            )}`}
+                          >
+                            <option value="Pending" className="bg-white text-gray-800">
+                              Pending
+                            </option>
+                            <option value="Confirmed" className="bg-white text-gray-800">
+                              Confirmed
+                            </option>
+                            <option value="Out for Delivery" className="bg-white text-gray-800">
+                              Out for Delivery
+                            </option>
+                            <option value="Delivered" className="bg-white text-gray-800">
+                              Delivered / Received
+                            </option>
+                            <option value="Cancelled" className="bg-white text-gray-800">
+                              Cancelled
+                            </option>
+                          </select>
+                          <div className="pointer-events-none absolute right-2.5 flex items-center">
+                            {isUpdating ? (
+                              <Loader2 className="w-3.5 h-3.5 animate-spin text-gray-500" />
+                            ) : (
+                              <ChevronDown className="w-3.5 h-3.5 opacity-60" />
+                            )}
+                          </div>
+                        </div>
                       </td>
+
                       <td className="py-3.5 px-4 text-right">
                         <button
                           type="button"
@@ -332,7 +385,7 @@ export default function AdminOrdersPage() {
                   /[^0-9]/g,
                   ''
                 )}?text=${encodeURIComponent(
-                  `Hello ${selectedOrder.customer.fullName}! We are contacting you from APNA Bazar regarding your order ${selectedOrder.orderNumber}.`
+                  `Hello ${selectedOrder.customer.fullName}! We are contacting you from APNA Bazar regarding your order ${selectedOrder.orderNumber} (Status: ${selectedOrder.status}).`
                 )}`}
                 target="_blank"
                 rel="noreferrer"
@@ -355,9 +408,7 @@ export default function AdminOrdersPage() {
             </div>
           </div>
 
-          {/* ======================================================== */}
-          {/* 1. UPPER SECTION: DETAILS CARDS (Customer, Financials) */}
-          {/* ======================================================== */}
+          {/* Upper Section: Customer, Shipping, and Payment Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
             {/* Customer Information Card */}
             <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 space-y-3">
@@ -405,31 +456,43 @@ export default function AdminOrdersPage() {
               </div>
             </div>
 
-            {/* Order Status & Payment Summary Card */}
+            {/* Order Status Dropdown & Payment Summary Card */}
             <div className="bg-gray-50 p-5 rounded-xl border border-gray-100 space-y-3">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-brand-brown font-bold text-xs uppercase tracking-wider">
                   <CreditCard className="w-4 h-4" />
                   <span>Update Order Status</span>
                 </div>
-                {updatingStatus && <Loader2 className="w-3.5 h-3.5 animate-spin text-brand-brown" />}
+                {updatingOrderId === selectedOrder.id && (
+                  <Loader2 className="w-3.5 h-3.5 animate-spin text-brand-brown" />
+                )}
               </div>
 
-              {/* Status Select Dropdown */}
+              {/* Status Select Dropdown in Details Box */}
               <div>
                 <label className="block text-[11px] text-gray-400 font-medium mb-1">
                   Change Current Status:
                 </label>
                 <select
-                  value={selectedOrder.status}
-                  disabled={updatingStatus}
-                  onChange={(e) => handleStatusChange(e.target.value as OrderStatus)}
+                  value={
+                    selectedOrder.status === 'Processing'
+                      ? 'Confirmed'
+                      : selectedOrder.status === 'Shipped'
+                      ? 'Out for Delivery'
+                      : selectedOrder.status === 'Received'
+                      ? 'Delivered'
+                      : selectedOrder.status
+                  }
+                  disabled={updatingOrderId === selectedOrder.id}
+                  onChange={(e) =>
+                    handleStatusChange(selectedOrder.id, e.target.value as OrderStatus)
+                  }
                   className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-semibold text-brand-black focus:outline-none focus:border-brand-brown"
                 >
-                  <option value="Pending">Pending (New)</option>
-                  <option value="Processing">Processing (Confirmed)</option>
-                  <option value="Shipped">Shipped (On Way)</option>
-                  <option value="Delivered">Delivered (Completed)</option>
+                  <option value="Pending">Pending</option>
+                  <option value="Confirmed">Confirmed</option>
+                  <option value="Out for Delivery">Out for Delivery</option>
+                  <option value="Delivered">Delivered / Received</option>
                   <option value="Cancelled">Cancelled</option>
                 </select>
               </div>
@@ -459,9 +522,7 @@ export default function AdminOrdersPage() {
             </div>
           </div>
 
-          {/* ======================================================== */}
-          {/* 2. LOWER SECTION: ITEMS IN TABLE FORM                   */}
-          {/* ======================================================== */}
+          {/* Lower Section: Items Table */}
           <div className="space-y-3 pt-2">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-bold text-brand-black uppercase tracking-wider flex items-center gap-2">
@@ -498,6 +559,7 @@ export default function AdminOrdersPage() {
                                 alt={item.productName}
                                 fill
                                 sizes="48px"
+                                unoptimized
                                 className="object-cover"
                               />
                             </div>

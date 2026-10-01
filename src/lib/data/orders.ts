@@ -27,9 +27,12 @@ export async function getOrderStats() {
   
   const statusCounts: Record<OrderStatus, number> = {
     Pending: 0,
+    Confirmed: 0,
     Processing: 0,
+    'Out for Delivery': 0,
     Shipped: 0,
     Delivered: 0,
+    Received: 0,
     Cancelled: 0,
   };
 
