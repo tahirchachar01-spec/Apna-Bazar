@@ -9,7 +9,7 @@ export function DashboardCharts() {
         <div className="flex items-center justify-between mb-4">
           <div>
             <h3 className="text-sm font-bold text-brand-black">Sales Overview</h3>
-            <p className="text-xs text-gray-400">Store revenue performance</p>
+            <p className="text-xs text-gray-400">Store revenue performance: Rs. 0</p>
           </div>
           <button
             type="button"
@@ -20,8 +20,8 @@ export function DashboardCharts() {
           </button>
         </div>
 
-        {/* SVG Chart Graphic */}
-        <div className="relative w-full h-56 pt-4">
+        {/* SVG Chart Graphic - Flat 0 Baseline */}
+        <div className="relative w-full h-56 pt-4 flex flex-col justify-center">
           <svg
             viewBox="0 0 700 200"
             className="w-full h-full overflow-visible"
@@ -29,51 +29,45 @@ export function DashboardCharts() {
           >
             <defs>
               <linearGradient id="salesGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#10B981" stopOpacity="0.25" />
+                <stop offset="0%" stopColor="#10B981" stopOpacity="0.1" />
                 <stop offset="100%" stopColor="#10B981" stopOpacity="0.0" />
               </linearGradient>
             </defs>
 
             {/* Horizontal Grid lines */}
-            <line x1="0" y1="40" x2="700" y2="40" stroke="#f3f4f6" strokeWidth="1" />
-            <line x1="0" y1="90" x2="700" y2="90" stroke="#f3f4f6" strokeWidth="1" />
-            <line x1="0" y1="140" x2="700" y2="140" stroke="#f3f4f6" strokeWidth="1" />
-            <line x1="0" y1="190" x2="700" y2="190" stroke="#f3f4f6" strokeWidth="1" />
+            <line x1="0" y1="40" x2="700" y2="40" stroke="#f3f4f6" strokeWidth="1" strokeDasharray="4 4" />
+            <line x1="0" y1="90" x2="700" y2="90" stroke="#f3f4f6" strokeWidth="1" strokeDasharray="4 4" />
+            <line x1="0" y1="140" x2="700" y2="140" stroke="#f3f4f6" strokeWidth="1" strokeDasharray="4 4" />
+            <line x1="0" y1="190" x2="700" y2="190" stroke="#e5e7eb" strokeWidth="1.5" />
 
-            {/* Area fill */}
-            <polygon
-              points="20,160 120,120 220,140 320,80 420,110 520,60 680,100 680,190 20,190"
-              fill="url(#salesGradient)"
-            />
-
-            {/* Line */}
+            {/* Flat Line at baseline 190 (0 sales) */}
             <polyline
-              points="20,160 120,120 220,140 320,80 420,110 520,60 680,100"
+              points="20,190 120,190 220,190 320,190 420,190 520,190 680,190"
               fill="none"
-              stroke="#10B981"
-              strokeWidth="3"
+              stroke="#9CA3AF"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
 
-            {/* Data Dots */}
+            {/* Data Dots on baseline */}
             {[
-              { cx: 20, cy: 160 },
-              { cx: 120, cy: 120 },
-              { cx: 220, cy: 140 },
-              { cx: 320, cy: 80 },
-              { cx: 420, cy: 110 },
-              { cx: 520, cy: 60 },
-              { cx: 680, cy: 100 },
+              { cx: 20, cy: 190 },
+              { cx: 120, cy: 190 },
+              { cx: 220, cy: 190 },
+              { cx: 320, cy: 190 },
+              { cx: 420, cy: 190 },
+              { cx: 520, cy: 190 },
+              { cx: 680, cy: 190 },
             ].map((pt, i) => (
               <circle
                 key={i}
                 cx={pt.cx}
                 cy={pt.cy}
-                r="4"
+                r="3.5"
                 fill="#ffffff"
-                stroke="#10B981"
-                strokeWidth="2.5"
+                stroke="#9CA3AF"
+                strokeWidth="2"
               />
             ))}
           </svg>
@@ -81,13 +75,13 @@ export function DashboardCharts() {
 
         {/* Date labels */}
         <div className="flex justify-between text-[11px] text-gray-400 pt-3 border-t border-gray-100">
-          <span>Aug 24</span>
-          <span>Aug 25</span>
-          <span>Aug 26</span>
-          <span>Aug 27</span>
-          <span>Aug 28</span>
-          <span>Aug 29</span>
-          <span>Aug 30</span>
+          <span>Day 1</span>
+          <span>Day 2</span>
+          <span>Day 3</span>
+          <span>Day 4</span>
+          <span>Day 5</span>
+          <span>Day 6</span>
+          <span>Today</span>
         </div>
       </div>
 
@@ -103,11 +97,11 @@ export function DashboardCharts() {
           </span>
         </div>
 
-        {/* Donut representation */}
+        {/* Donut representation - Cleared to 0 */}
         <div className="relative flex items-center justify-center py-4">
-          <div className="relative w-36 h-36 rounded-full border-[10px] border-amber-400 flex items-center justify-center shadow-inner">
+          <div className="relative w-36 h-36 rounded-full border-[10px] border-gray-200 flex items-center justify-center shadow-inner">
             <div className="text-center">
-              <span className="block text-2xl font-black text-brand-black">142</span>
+              <span className="block text-3xl font-black text-brand-black">0</span>
               <span className="block text-[10px] text-gray-400 uppercase font-semibold">
                 Total Orders
               </span>
@@ -115,35 +109,35 @@ export function DashboardCharts() {
           </div>
         </div>
 
-        {/* Legend */}
+        {/* Legend - All 0 */}
         <div className="grid grid-cols-2 gap-2.5 pt-4 border-t border-gray-100 text-xs">
-          <div className="flex items-center justify-between p-1.5 bg-amber-50/50 rounded-lg">
+          <div className="flex items-center justify-between p-1.5 bg-gray-50 rounded-lg">
             <span className="flex items-center gap-1.5 text-gray-600">
-              <span className="w-2 h-2 rounded-full bg-amber-500" />
+              <span className="w-2 h-2 rounded-full bg-amber-400" />
               Pending
             </span>
-            <span className="font-bold text-brand-black">32</span>
+            <span className="font-bold text-gray-700">0</span>
           </div>
-          <div className="flex items-center justify-between p-1.5 bg-blue-50/50 rounded-lg">
+          <div className="flex items-center justify-between p-1.5 bg-gray-50 rounded-lg">
             <span className="flex items-center gap-1.5 text-gray-600">
-              <span className="w-2 h-2 rounded-full bg-blue-500" />
-              Processing
+              <span className="w-2 h-2 rounded-full bg-blue-400" />
+              Confirmed
             </span>
-            <span className="font-bold text-brand-black">48</span>
+            <span className="font-bold text-gray-700">0</span>
           </div>
-          <div className="flex items-center justify-between p-1.5 bg-indigo-50/50 rounded-lg">
+          <div className="flex items-center justify-between p-1.5 bg-gray-50 rounded-lg">
             <span className="flex items-center gap-1.5 text-gray-600">
-              <span className="w-2 h-2 rounded-full bg-indigo-500" />
-              Shipped
+              <span className="w-2 h-2 rounded-full bg-purple-400" />
+              Out for Delivery
             </span>
-            <span className="font-bold text-brand-black">36</span>
+            <span className="font-bold text-gray-700">0</span>
           </div>
-          <div className="flex items-center justify-between p-1.5 bg-emerald-50/50 rounded-lg">
+          <div className="flex items-center justify-between p-1.5 bg-gray-50 rounded-lg">
             <span className="flex items-center gap-1.5 text-gray-600">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span className="w-2 h-2 rounded-full bg-emerald-400" />
               Delivered
             </span>
-            <span className="font-bold text-brand-black">24</span>
+            <span className="font-bold text-gray-700">0</span>
           </div>
         </div>
       </div>

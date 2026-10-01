@@ -1,19 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-
-interface TopProduct {
-  name: string;
-  sold: number;
-  percentage: number;
-}
-
-const TOP_PRODUCTS: TopProduct[] = [
-  { name: 'Wireless Earbuds', sold: 32, percentage: 85 },
-  { name: 'Smart Watch', sold: 28, percentage: 74 },
-  { name: "Men's Shoes", sold: 25, percentage: 66 },
-  { name: 'Backpack', sold: 20, percentage: 52 },
-  { name: 'T-Shirt', sold: 18, percentage: 48 },
-];
+import { Package } from 'lucide-react';
 
 export function TopSellingList() {
   return (
@@ -31,21 +18,14 @@ export function TopSellingList() {
         </Link>
       </div>
 
-      <div className="space-y-4">
-        {TOP_PRODUCTS.map((prod) => (
-          <div key={prod.name} className="space-y-1.5">
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-semibold text-brand-black">{prod.name}</span>
-              <span className="text-gray-400 font-medium">{prod.sold} sold</span>
-            </div>
-            <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-emerald-500 rounded-full transition-all duration-500"
-                style={{ width: `${prod.percentage}%` }}
-              />
-            </div>
-          </div>
-        ))}
+      <div className="py-12 flex flex-col items-center justify-center text-center space-y-2">
+        <div className="w-12 h-12 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center text-gray-400 mb-1">
+          <Package className="w-5 h-5" />
+        </div>
+        <p className="text-xs font-bold text-brand-black">0 Products Sold</p>
+        <p className="text-[11px] text-gray-400 max-w-[200px]">
+          All metrics cleared. Once customer orders are placed, top selling items will appear here.
+        </p>
       </div>
     </div>
   );

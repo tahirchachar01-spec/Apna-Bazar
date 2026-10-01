@@ -18,11 +18,18 @@ import {
   X,
 } from 'lucide-react';
 
-const ADMIN_LINKS = [
+interface AdminLink {
+  name: string;
+  href: string;
+  icon: React.ComponentType<{ className?: string }>;
+  badge?: string;
+}
+
+const ADMIN_LINKS: AdminLink[] = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
   { name: 'Products', href: '/admin/products', icon: Package },
   { name: 'Categories', href: '/admin/categories', icon: Layers },
-  { name: 'Orders', href: '/admin/orders', icon: ShoppingBag, badge: '5' },
+  { name: 'Orders', href: '/admin/orders', icon: ShoppingBag },
   { name: 'Customers', href: '/admin/customers', icon: Users },
   { name: 'Deals', href: '/admin/deals', icon: Percent },
   { name: 'Settings', href: '/admin/settings', icon: Settings },

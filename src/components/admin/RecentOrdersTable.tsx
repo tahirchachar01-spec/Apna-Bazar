@@ -52,11 +52,19 @@ export function RecentOrdersTable({ orders }: RecentOrdersTableProps) {
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-50">
-            {orders.map((order) => (
-              <tr key={order.id} className="hover:bg-gray-50/60 transition-colors">
-                <td className="py-3 pr-4 font-bold text-brand-brown">
-                  {order.orderNumber}
+            {orders.length === 0 ? (
+              <tr>
+                <td colSpan={5} className="py-10 text-center text-gray-400">
+                  <p className="text-xs font-semibold text-gray-600">No recent orders found</p>
+                  <p className="text-[11px] text-gray-400 mt-0.5">All dashboard values cleared to 0</p>
                 </td>
+              </tr>
+            ) : (
+              orders.map((order) => (
+                <tr key={order.id} className="hover:bg-gray-50/60 transition-colors">
+                  <td className="py-3 pr-4 font-bold text-brand-brown">
+                    {order.orderNumber}
+                  </td>
                 <td className="py-3 px-4 font-medium text-brand-black">
                   {order.customer.fullName}
                   <span className="block text-[11px] text-gray-400 font-normal">
@@ -84,7 +92,8 @@ export function RecentOrdersTable({ orders }: RecentOrdersTableProps) {
                   })}
                 </td>
               </tr>
-            ))}
+              ))
+            )}
           </tbody>
         </table>
       </div>
