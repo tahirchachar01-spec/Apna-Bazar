@@ -1,0 +1,139 @@
+[
+  {
+    "id": "ord-10042",
+    "orderNumber": "#10042",
+    "customer": {
+      "fullName": "Ali Raza",
+      "phoneNumber": "03001234567",
+      "email": "ali.raza@example.com",
+      "address": "House 14-B, Street 3, DHA Phase 5",
+      "city": "Lahore",
+      "notes": "Please call before arrival."
+    },
+    "items": [
+      {
+        "productId": "prod-1",
+        "productName": "Luxury Chronograph Obsidian Black Watch",
+        "productImage": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=800&auto=format&fit=crop&q=80",
+        "price": 3499,
+        "quantity": 1
+      },
+      {
+        "productId": "prod-8",
+        "productName": "Tactical NY Embroidered Baseball Cap",
+        "productImage": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800&auto=format&fit=crop&q=80",
+        "price": 1199,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 4698,
+    "deliveryCharges": 0,
+    "total": 4698,
+    "status": "Delivered",
+    "createdAt": "2026-08-30T14:32:00Z"
+  },
+  {
+    "id": "ord-10041",
+    "orderNumber": "#10041",
+    "customer": {
+      "fullName": "Sana Khan",
+      "phoneNumber": "03219876543",
+      "email": "sana.k@example.com",
+      "address": "Flat 402, Al-Razi Heights, Clifton",
+      "city": "Karachi",
+      "notes": ""
+    },
+    "items": [
+      {
+        "productId": "prod-2",
+        "productName": "Heavyweight Streetwear Essentials Black Hoodie",
+        "productImage": "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format&fit=crop&q=80",
+        "price": 2950,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 2950,
+    "deliveryCharges": 0,
+    "total": 2950,
+    "status": "Processing",
+    "createdAt": "2026-08-30T13:15:00Z"
+  },
+  {
+    "id": "ord-10040",
+    "orderNumber": "#10040",
+    "customer": {
+      "fullName": "Usman Tariq",
+      "phoneNumber": "03335557788",
+      "email": "usman.t@example.com",
+      "address": "Plot 89, Sector F-8/2",
+      "city": "Islamabad",
+      "notes": "Deliver during working hours."
+    },
+    "items": [
+      {
+        "productId": "prod-4",
+        "productName": "Urban Edge Air Retro High Sneakers",
+        "productImage": "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80",
+        "price": 5999,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 5999,
+    "deliveryCharges": 0,
+    "total": 5999,
+    "status": "Shipped",
+    "createdAt": "2026-08-30T11:47:00Z"
+  },
+  {
+    "id": "ord-10039",
+    "orderNumber": "#10039",
+    "customer": {
+      "fullName": "Ayesha Malik",
+      "phoneNumber": "03451122334",
+      "email": "ayesha.m@example.com",
+      "address": "House 51, Model Town Extension",
+      "city": "Faisalabad",
+      "notes": ""
+    },
+    "items": [
+      {
+        "productId": "prod-8",
+        "productName": "Tactical NY Embroidered Baseball Cap",
+        "productImage": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800&auto=format&fit=crop&q=80",
+        "price": 1199,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 1199,
+    "deliveryCharges": 200,
+    "total": 1399,
+    "status": "Pending",
+    "createdAt": "2026-08-30T10:22:00Z"
+  },
+  {
+    "id": "ord-10038",
+    "orderNumber": "#10038",
+    "customer": {
+      "fullName": "Bilal Ahmed",
+      "phoneNumber": "03124455667",
+      "email": "bilal.ahmed@example.com",
+      "address": "Street 9, Satellite Town",
+      "city": "Rawalpindi",
+      "notes": ""
+    },
+    "items": [
+      {
+        "productId": "prod-5",
+        "productName": "Active ANC Wireless Noise Cancelling Earbuds",
+        "productImage": "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&auto=format&fit=crop&q=80",
+        "price": 3199,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 3199,
+    "deliveryCharges": 0,
+    "total": 3199,
+    "status": "Delivered",
+    "createdAt": "2026-08-30T09:18:00Z"
+  }
+]

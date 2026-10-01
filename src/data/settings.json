@@ -1,0 +1,29 @@
+{
+  "general": {
+    "storeName": "APNA Bazar",
+    "tagline": "Shop Smarter • Live Better",
+    "logo": "/images/brand/logo.jpg",
+    "currency": "PKR",
+    "currencySymbol": "Rs.",
+    "supportEmail": "support@apnabazar.pk",
+    "supportPhone": "+92 300 1234567",
+    "address": "Gulberg III, Lahore, Pakistan"
+  },
+  "delivery": {
+    "deliveryCharges": 200,
+    "freeDeliveryThreshold": 2000,
+    "estimatedDays": "2-4 Business Days"
+  },
+  "whatsapp": {
+    "phoneNumber": "923001234567",
+    "orderMessageTemplate": "Hello APNA Bazar! I want to confirm my order *{orderNumber}*:\n\n*Customer Details:*\nName: {customerName}\nPhone: {phoneNumber}\nCity: {city}\nAddress: {address}\n\n*Order Items:*\n{itemsList}\n\nSubtotal: {subtotal}\nDelivery: {deliveryCharges}\n*Grand Total: {total}*\n\nPlease confirm my order. Thank you!",
+    "inquiryMessageTemplate": "Hello APNA Bazar, I have an inquiry about {productName}.",
+    "isEnabled": true
+  },
+  "social": {
+    "facebook": "https://facebook.com/apnabazar.pk",
+    "instagram": "https://instagram.com/apnabazar.pk",
+    "tiktok": "https://tiktok.com/@apnabazar.pk",
+    "youtube": "https://youtube.com/@apnabazar"
+  }
+}

@@ -1,0 +1,52 @@
+[
+  {
+    "id": "cust-1",
+    "name": "Ali Raza",
+    "email": "ali.raza@example.com",
+    "phone": "03001234567",
+    "city": "Lahore",
+    "totalOrders": 4,
+    "totalSpent": 18450,
+    "createdAt": "2026-05-12T10:00:00Z"
+  },
+  {
+    "id": "cust-2",
+    "name": "Sana Khan",
+    "email": "sana.k@example.com",
+    "phone": "03219876543",
+    "city": "Karachi",
+    "totalOrders": 3,
+    "totalSpent": 12800,
+    "createdAt": "2026-06-20T14:30:00Z"
+  },
+  {
+    "id": "cust-3",
+    "name": "Usman Tariq",
+    "email": "usman.t@example.com",
+    "phone": "03335557788",
+    "city": "Islamabad",
+    "totalOrders": 5,
+    "totalSpent": 27500,
+    "createdAt": "2026-04-05T09:15:00Z"
+  },
+  {
+    "id": "cust-4",
+    "name": "Ayesha Malik",
+    "email": "ayesha.m@example.com",
+    "phone": "03451122334",
+    "city": "Faisalabad",
+    "totalOrders": 2,
+    "totalSpent": 6400,
+    "createdAt": "2026-07-11T16:20:00Z"
+  },
+  {
+    "id": "cust-5",
+    "name": "Bilal Ahmed",
+    "email": "bilal.ahmed@example.com",
+    "phone": "03124455667",
+    "city": "Rawalpindi",
+    "totalOrders": 6,
+    "totalSpent": 31200,
+    "createdAt": "2026-03-29T11:45:00Z"
+  }
+]

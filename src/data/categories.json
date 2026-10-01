@@ -1,0 +1,90 @@
+[
+  {
+    "id": "cat-1",
+    "name": "Fashion",
+    "slug": "fashion",
+    "description": "Latest clothing, streetwear, hoodies, and traditional wear",
+    "image": "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&auto=format&fit=crop&q=80",
+    "icon": "Shirt",
+    "isActive": true,
+    "displayOrder": 1,
+    "productCount": 42
+  },
+  {
+    "id": "cat-2",
+    "name": "Electronics",
+    "slug": "electronics",
+    "description": "Smart tech, chargers, audio devices, and computer accessories",
+    "image": "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&auto=format&fit=crop&q=80",
+    "icon": "Smartphone",
+    "isActive": true,
+    "displayOrder": 2,
+    "productCount": 38
+  },
+  {
+    "id": "cat-3",
+    "name": "Watches",
+    "slug": "watches",
+    "description": "Luxury chronographs, smart watches, and minimalist timepieces",
+    "image": "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=600&auto=format&fit=crop&q=80",
+    "icon": "Watch",
+    "isActive": true,
+    "displayOrder": 3,
+    "productCount": 24
+  },
+  {
+    "id": "cat-4",
+    "name": "Shoes",
+    "slug": "shoes",
+    "description": "Sneakers, running shoes, formal leather boots, and casual footwear",
+    "image": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&auto=format&fit=crop&q=80",
+    "icon": "Footprints",
+    "isActive": true,
+    "displayOrder": 4,
+    "productCount": 30
+  },
+  {
+    "id": "cat-5",
+    "name": "Beauty & Fragrances",
+    "slug": "beauty",
+    "description": "Premium perfumes, colognes, personal care, and grooming kits",
+    "image": "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=600&auto=format&fit=crop&q=80",
+    "icon": "Sparkles",
+    "isActive": true,
+    "displayOrder": 5,
+    "productCount": 18
+  },
+  {
+    "id": "cat-6",
+    "name": "Home & Living",
+    "slug": "home-living",
+    "description": "Modern home decor, kitchen gadgets, lamps, and organizer solutions",
+    "image": "https://images.unsplash.com/photo-1513694203232-719a280e022f?w=600&auto=format&fit=crop&q=80",
+    "icon": "Home",
+    "isActive": true,
+    "displayOrder": 6,
+    "productCount": 25
+  },
+  {
+    "id": "cat-7",
+    "name": "Accessories",
+    "slug": "accessories",
+    "description": "Sunglasses, caps, leather wallets, belts, and bags",
+    "image": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&auto=format&fit=crop&q=80",
+    "icon": "Glasses",
+    "isActive": true,
+    "displayOrder": 7,
+    "productCount": 35
+  },
+  {
+    "id": "cat-8",
+    "name": "Gadgets",
+    "slug": "gadgets",
+    "description": "Wireless earbuds, car mounts, portable power banks, and LED lights",
+    "image": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&auto=format&fit=crop&q=80",
+    "icon": "Headphones",
+    "isActive": true,
+    "displayOrder": 8,
+    "productCount": 29
+  }
+]

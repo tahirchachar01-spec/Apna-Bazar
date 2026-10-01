@@ -1,0 +1,246 @@
+[
+  {
+    "id": "prod-1",
+    "name": "Luxury Chronograph Obsidian Black Watch",
+    "slug": "luxury-chronograph-obsidian-black-watch",
+    "description": "Crafted with surgical-grade stainless steel and sapphire crystal glass, this premium chronograph watch offers Japanese quartz movement, 50m water resistance, and an interchangeable genuine leather strap. Perfect for formal and everyday wear.",
+    "shortDescription": "Surgical grade stainless steel chronograph with sapphire crystal.",
+    "category": "Watches",
+    "categorySlug": "watches",
+    "price": 4500,
+    "salePrice": 3499,
+    "discountPercentage": 22,
+    "rating": 4.9,
+    "reviewCount": 128,
+    "stock": 45,
+    "sku": "WAT-OBS-01",
+    "images": [
+      "https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800&auto=format&fit=crop&q=80"
+    ],
+    "isFeatured": true,
+    "isDeal": true,
+    "isTrending": true,
+    "isActive": true,
+    "specifications": [
+      { "label": "Case Material", "value": "316L Stainless Steel" },
+      { "label": "Dial Glass", "value": "Sapphire Coated Crystal" },
+      { "label": "Movement", "value": "Precision Japanese Quartz" },
+      { "label": "Water Resistance", "value": "5 ATM / 50 Meters" },
+      { "label": "Strap", "value": "Genuine Italian Leather (22mm)" }
+    ],
+    "createdAt": "2026-08-15T10:00:00Z"
+  },
+  {
+    "id": "prod-2",
+    "name": "Heavyweight Streetwear Essentials Black Hoodie",
+    "slug": "heavyweight-streetwear-essentials-black-hoodie",
+    "description": "450 GSM fleece hoodie built for ultimate warmth, comfort, and a relaxed boxy streetwear drape. Features pre-shrunk combed cotton, double-layered hood, and durable ribbed cuffs.",
+    "shortDescription": "Premium 450 GSM ultra-heavyweight cotton fleece streetwear hoodie.",
+    "category": "Fashion",
+    "categorySlug": "fashion",
+    "price": 3800,
+    "salePrice": 2950,
+    "discountPercentage": 22,
+    "rating": 4.8,
+    "reviewCount": 94,
+    "stock": 60,
+    "sku": "FSH-HD-02",
+    "images": [
+      "https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1578587018452-892bacefd3f2?w=800&auto=format&fit=crop&q=80"
+    ],
+    "isFeatured": true,
+    "isDeal": false,
+    "isTrending": true,
+    "isActive": true,
+    "specifications": [
+      { "label": "Material", "value": "100% Combed Cotton Fleece" },
+      { "label": "Fabric Weight", "value": "450 GSM Heavyweight" },
+      { "label": "Fit", "value": "Relaxed Boxy Drop-Shoulder" },
+      { "label": "Care", "value": "Machine wash cold, air dry" }
+    ],
+    "createdAt": "2026-08-18T12:00:00Z"
+  },
+  {
+    "id": "prod-3",
+    "name": "Bleu De Luxe Eau De Parfum (100ml)",
+    "slug": "bleu-de-luxe-eau-de-parfum-100ml",
+    "description": "An intense, woody aromatic fragrance that opens with fresh citrus zest, evolving into heart notes of dry cedar and pink pepper, anchored by rich sandalwood and amber.",
+    "shortDescription": "Long-lasting woody aromatic fragrance with amber and citrus notes.",
+    "category": "Beauty & Fragrances",
+    "categorySlug": "beauty",
+    "price": 6200,
+    "salePrice": 4850,
+    "discountPercentage": 22,
+    "rating": 5.0,
+    "reviewCount": 167,
+    "stock": 35,
+    "sku": "BTY-PRF-03",
+    "images": [
+      "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=800&auto=format&fit=crop&q=80"
+    ],
+    "isFeatured": true,
+    "isDeal": true,
+    "isTrending": true,
+    "isActive": true,
+    "specifications": [
+      { "label": "Volume", "value": "100 ml / 3.4 fl. oz" },
+      { "label": "Concentration", "value": "Eau de Parfum (22% Oil)" },
+      { "label": "Longevity", "value": "Up to 14 Hours" },
+      { "label": "Top Notes", "value": "Grapefruit, Lemon, Mint" }
+    ],
+    "createdAt": "2026-08-20T09:30:00Z"
+  },
+  {
+    "id": "prod-4",
+    "name": "Urban Edge Air Retro High Sneakers",
+    "slug": "urban-edge-air-retro-high-sneakers",
+    "description": "Iconic high-top silhouette crafted from genuine leather and suede accents. Features responsive air cushioning in the sole, padded collars for ankle support, and high-traction rubber outsole.",
+    "shortDescription": "Classic high-top silhouette with responsive air cushioning.",
+    "category": "Shoes",
+    "categorySlug": "shoes",
+    "price": 7500,
+    "salePrice": 5999,
+    "discountPercentage": 20,
+    "rating": 4.7,
+    "reviewCount": 83,
+    "stock": 25,
+    "sku": "SHO-SNK-04",
+    "images": [
+      "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&auto=format&fit=crop&q=80"
+    ],
+    "isFeatured": false,
+    "isDeal": true,
+    "isTrending": true,
+    "isActive": true,
+    "specifications": [
+      { "label": "Upper Material", "value": "Full Grain Leather & Suede" },
+      { "label": "Midsole", "value": "Air Cushioned EVA Foam" },
+      { "label": "Sole", "value": "Anti-Slip Durable Rubber" }
+    ],
+    "createdAt": "2026-08-22T14:15:00Z"
+  },
+  {
+    "id": "prod-5",
+    "name": "Active ANC Wireless Noise Cancelling Earbuds",
+    "slug": "active-anc-wireless-noise-cancelling-earbuds",
+    "description": "Immerse yourself in high-fidelity sound with 38dB Active Noise Cancellation, transparency mode, 40 hours of combined battery life, and IPX5 water resistance.",
+    "shortDescription": "40H battery, 38dB Active Noise Cancellation & Bluetooth 5.3.",
+    "category": "Gadgets",
+    "categorySlug": "gadgets",
+    "price": 4200,
+    "salePrice": 3199,
+    "discountPercentage": 24,
+    "rating": 4.9,
+    "reviewCount": 215,
+    "stock": 50,
+    "sku": "GDT-EBD-05",
+    "images": [
+      "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1572536147248-ac59a8abfa4b?w=800&auto=format&fit=crop&q=80"
+    ],
+    "isFeatured": true,
+    "isDeal": true,
+    "isTrending": false,
+    "isActive": true,
+    "specifications": [
+      { "label": "ANC Rating", "value": "38 dB Hybrid Noise Cancellation" },
+      { "label": "Battery Life", "value": "8h (earbuds) + 32h (case)" },
+      { "label": "Connectivity", "value": "Bluetooth 5.3 (Ultra Low Latency)" },
+      { "label": "Waterproof", "value": "IPX5 Splash Resistant" }
+    ],
+    "createdAt": "2026-08-25T11:45:00Z"
+  },
+  {
+    "id": "prod-6",
+    "name": "Classic Vintage Polarized Sunglasses",
+    "slug": "classic-vintage-polarized-sunglasses",
+    "description": "Timeless retro square frame designed with lightweight acetate and UV400 TAC polarized lenses that eliminate glare and deliver crystal-clear contrast.",
+    "shortDescription": "UV400 polarized retro frames for everyday UV protection.",
+    "category": "Accessories",
+    "categorySlug": "accessories",
+    "price": 2400,
+    "salePrice": 1799,
+    "discountPercentage": 25,
+    "rating": 4.6,
+    "reviewCount": 74,
+    "stock": 80,
+    "sku": "ACC-SGL-06",
+    "images": [
+      "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=800&auto=format&fit=crop&q=80",
+      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=800&auto=format&fit=crop&q=80"
+    ],
+    "isFeatured": false,
+    "isDeal": false,
+    "isTrending": true,
+    "isActive": true,
+    "specifications": [
+      { "label": "Lens", "value": "TAC Polarized UV400 Protection" },
+      { "label": "Frame Material", "value": "Reinforced Handcrafted Acetate" },
+      { "label": "Hinges", "value": "5-Barrel Metal Spring Hinges" }
+    ],
+    "createdAt": "2026-08-28T16:00:00Z"
+  },
+  {
+    "id": "prod-7",
+    "name": "Minimalist Smart Fitness Band Tracker",
+    "slug": "minimalist-smart-fitness-band-tracker",
+    "description": "Track your heart rate, SpO2, sleep stages, and over 50 sports modes on a bright AMOLED touch display. Boasts up to 14 days of battery life per charge.",
+    "shortDescription": "AMOLED touch screen, 14-day battery and 50+ sport modes.",
+    "category": "Electronics",
+    "categorySlug": "electronics",
+    "price": 3500,
+    "salePrice": 2799,
+    "discountPercentage": 20,
+    "rating": 4.5,
+    "reviewCount": 59,
+    "stock": 0,
+    "sku": "ELC-SMT-07",
+    "images": [
+      "https://images.unsplash.com/photo-1575311373937-040b8e1fd5b6?w=800&auto=format&fit=crop&q=80"
+    ],
+    "isFeatured": false,
+    "isDeal": true,
+    "isTrending": false,
+    "isActive": true,
+    "specifications": [
+      { "label": "Display", "value": "1.47-inch AMOLED Color Touch" },
+      { "label": "Battery", "value": "14 Days Typical Usage" },
+      { "label": "Sensors", "value": "Optical Heart Rate, SpO2, Accelerometer" }
+    ],
+    "createdAt": "2026-09-01T08:00:00Z"
+  },
+  {
+    "id": "prod-8",
+    "name": "Tactical NY Embroidered Baseball Cap",
+    "slug": "tactical-ny-embroidered-baseball-cap",
+    "description": "Structured 6-panel cotton twill cap with high-density front 3D embroidery, breathable eyelets, and adjustable brass buckle strap.",
+    "shortDescription": "Structured 6-panel cotton twill cap with 3D embroidery.",
+    "category": "Accessories",
+    "categorySlug": "accessories",
+    "price": 1500,
+    "salePrice": 1199,
+    "discountPercentage": 20,
+    "rating": 4.7,
+    "reviewCount": 42,
+    "stock": 95,
+    "sku": "ACC-CAP-08",
+    "images": [
+      "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800&auto=format&fit=crop&q=80"
+    ],
+    "isFeatured": true,
+    "isDeal": false,
+    "isTrending": true,
+    "isActive": true,
+    "specifications": [
+      { "label": "Material", "value": "100% Washed Cotton Twill" },
+      { "label": "Closure", "value": "Brass Slide Buckle" },
+      { "label": "Size", "value": "Adjustable (56-60 cm)" }
+    ],
+    "createdAt": "2026-09-02T10:30:00Z"
+  }
+]
