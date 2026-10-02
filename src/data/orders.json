@@ -1,31 +1,5 @@
 [
   {
-    "id": "ord-10040",
-    "orderNumber": "#10040",
-    "customer": {
-      "fullName": "Usman Tariq",
-      "phoneNumber": "03335557788",
-      "email": "usman.t@example.com",
-      "address": "Plot 89, Sector F-8/2",
-      "city": "Islamabad",
-      "notes": "Deliver during working hours."
-    },
-    "items": [
-      {
-        "productId": "prod-4",
-        "productName": "Urban Edge Air Retro High Sneakers",
-        "productImage": "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&auto=format&fit=crop&q=80",
-        "price": 5999,
-        "quantity": 1
-      }
-    ],
-    "subtotal": 5999,
-    "deliveryCharges": 0,
-    "total": 5999,
-    "status": "Shipped",
-    "createdAt": "2026-08-30T11:47:00Z"
-  },
-  {
     "id": "ord-10039",
     "orderNumber": "#10039",
     "customer": {
