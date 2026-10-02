@@ -1,31 +1,5 @@
 [
   {
-    "id": "ord-10039",
-    "orderNumber": "#10039",
-    "customer": {
-      "fullName": "Ayesha Malik",
-      "phoneNumber": "03451122334",
-      "email": "ayesha.m@example.com",
-      "address": "House 51, Model Town Extension",
-      "city": "Faisalabad",
-      "notes": ""
-    },
-    "items": [
-      {
-        "productId": "prod-8",
-        "productName": "Tactical NY Embroidered Baseball Cap",
-        "productImage": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=800&auto=format&fit=crop&q=80",
-        "price": 1199,
-        "quantity": 1
-      }
-    ],
-    "subtotal": 1199,
-    "deliveryCharges": 200,
-    "total": 1399,
-    "status": "Pending",
-    "createdAt": "2026-08-30T10:22:00Z"
-  },
-  {
     "id": "ord-10038",
     "orderNumber": "#10038",
     "customer": {
