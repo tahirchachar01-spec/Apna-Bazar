@@ -9,6 +9,8 @@ import { NewsletterSection } from '@/components/home/NewsletterSection';
 import { getCategories } from '@/lib/data/categories';
 import { getTrendingProducts, getDeals, getFeaturedProducts } from '@/lib/data/products';
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   const [categories, trending, deals, featured] = await Promise.all([
     getCategories(),

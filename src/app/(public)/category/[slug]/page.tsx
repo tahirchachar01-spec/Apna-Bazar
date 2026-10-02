@@ -11,6 +11,9 @@ interface CategoryPageProps {
   params: { slug: string };
 }
 
+export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
+
 export async function generateStaticParams() {
   const categories = await getCategories();
   return categories.map((c) => ({

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { getProductsFromDb, saveProductsToDb } from '@/lib/db';
 import { Product } from '@/types/product';
 
@@ -47,6 +48,16 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: saveResult.error || 'Failed saving product' }, { status: 500 });
     }
 
+    try {
+      revalidatePath('/');
+      revalidatePath('/shop');
+      revalidatePath('/deals');
+      revalidatePath(`/category/${newProduct.categorySlug}`);
+      revalidatePath(`/product/${newProduct.slug}`);
+    } catch {
+      // safe fallback
+    }
+
     return NextResponse.json({ success: true, product: newProduct });
   } catch (error) {
     return NextResponse.json(
@@ -77,6 +88,16 @@ export async function PUT(req: NextRequest) {
       return NextResponse.json({ error: saveResult.error || 'Failed updating product' }, { status: 500 });
     }
 
+    try {
+      revalidatePath('/');
+      revalidatePath('/shop');
+      revalidatePath('/deals');
+      revalidatePath(`/category/${products[index].categorySlug}`);
+      revalidatePath(`/product/${products[index].slug}`);
+    } catch {
+      // safe fallback
+    }
+
     return NextResponse.json({ success: true, product: products[index] });
   } catch (error) {
     return NextResponse.json(
@@ -105,6 +126,14 @@ export async function DELETE(req: NextRequest) {
     const saveResult = await saveProductsToDb(filtered);
     if (!saveResult.success) {
       return NextResponse.json({ error: saveResult.error || 'Failed deleting product' }, { status: 500 });
+    }
+
+    try {
+      revalidatePath('/');
+      revalidatePath('/shop');
+      revalidatePath('/deals');
+    } catch {
+      // safe fallback
     }
 
     return NextResponse.json({ success: true });

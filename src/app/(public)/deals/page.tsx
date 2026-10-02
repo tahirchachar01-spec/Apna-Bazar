@@ -3,6 +3,8 @@ import { getDeals } from '@/lib/data/products';
 import { ProductGrid } from '@/components/product/ProductGrid';
 import { Sparkles, Flame, Clock } from 'lucide-react';
 
+export const dynamic = 'force-dynamic';
+
 export default async function DealsPage() {
   const dealProducts = await getDeals(12);
 
