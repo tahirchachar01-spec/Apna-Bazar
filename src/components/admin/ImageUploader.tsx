@@ -152,7 +152,7 @@ export function ImageUploader({ value, onChange, label = 'Product Image' }: Imag
             }`}
           >
             <Upload className="w-3.5 h-3.5" />
-            <span>From Device / PC</span>
+            <span>Mobile / Camera / PC</span>
           </button>
           <button
             type="button"
@@ -236,7 +236,7 @@ export function ImageUploader({ value, onChange, label = 'Product Image' }: Imag
               <input
                 ref={fileInputRef}
                 type="file"
-                accept="image/png,image/jpeg,image/webp,image/jpg"
+                accept="image/*"
                 onChange={handleFileChange}
                 className="hidden"
               />
@@ -280,7 +280,7 @@ export function ImageUploader({ value, onChange, label = 'Product Image' }: Imag
       <input
         ref={fileInputRef}
         type="file"
-        accept="image/png,image/jpeg,image/webp,image/jpg"
+        accept="image/*"
         onChange={handleFileChange}
         className="hidden"
       />
